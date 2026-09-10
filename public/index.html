@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f172a">
+  <title>Payment Pribadi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- QRCode.js untuk render QRIS -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+  <!-- Background glow effect -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <main class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="logo">Payment Pribadi</h1>
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>Payment Online</span>
+      </div>
+    </header>
+
+    <p class="subtitle">Pembayaran cepat, mudah, dan praktis.</p>
+
+    <!-- Section: Input Nominal -->
+    <section id="section-input" class="section active">
+      <div class="card card-input">
+        <h2 class="card-title">Masukkan Nominal</h2>
+        
+        <div class="input-wrapper">
+          <span class="input-prefix">Rp</span>
+          <input 
+            type="text" 
+            id="amountInput" 
+            class="amount-input" 
+            placeholder="0"
+            inputmode="numeric"
+            autocomplete="off"
+          >
+        </div>
+
+        <!-- Quick amount buttons -->
+        <div class="quick-amounts">
+          <button class="quick-btn" data-amount="10000">10rb</button>
+          <button class="quick-btn" data-amount="25000">25rb</button>
+          <button class="quick-btn" data-amount="50000">50rb</button>
+          <button class="quick-btn" data-amount="100000">100rb</button>
+        </div>
+
+        <button id="payButton" class="btn btn-primary">
+          <span class="btn-text">Bayar Sekarang</span>
+          <span class="btn-loader hidden"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Section: QRIS -->
+    <section id="section-qris" class="section">
+      <div class="card card-qris">
+        <h2 class="card-title">Scan QRIS untuk Membayar</h2>
+        
+        <div class="qris-container">
+          <canvas id="qrisCanvas"></canvas>
+        </div>
+
+        <div class="payment-info">
+          <div class="info-row">
+            <span class="info-label">Total Pembayaran</span>
+            <span class="info-value" id="qrisAmount">Rp0</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Status</span>
+            <span class="info-value status-pending" id="qrisStatus">
+              <span class="status-indicator"></span>
+              Menunggu Pembayaran...
+            </span>
+          </div>
+        </div>
+
+        <p class="qris-hint">Scan QRIS menggunakan aplikasi yang mendukung pembayaran QRIS.</p>
+
+        <div class="action-buttons">
+          <button id="downloadButton" class="btn btn-secondary">
+            <span>⬇️</span> Download QRIS
+          </button>
+          <button id="shareButton" class="btn btn-secondary">
+            <span>💾</span> Simpan / Bagikan
+          </button>
+        </div>
+
+        <button id="cancelButton" class="btn btn-ghost">Batalkan</button>
+      </div>
+    </section>
+
+    <!-- Section: Success -->
+    <section id="section-success" class="section">
+      <div class="card card-success">
+        <div class="success-icon">
+          <svg viewBox="0 0 52 52" class="checkmark">
+            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+        </div>
+
+        <h2 class="success-title">Pembayaran Berhasil 🎉</h2>
+        <p class="success-message">Pembayaran kamu telah diterima.</p>
+
+        <div class="success-details">
+          <div class="detail-row">
+            <span class="detail-label">Nominal</span>
+            <span class="detail-value" id="successAmount">Rp0</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">ID Transaksi</span>
+            <span class="detail-value" id="successOrderId">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Status</span>
+            <span class="detail-value status-success">Berhasil</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Waktu</span>
+            <span class="detail-value" id="successTime">-</span>
+          </div>
+        </div>
+
+        <button id="payAgainButton" class="btn btn-primary">Bayar Lagi</button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Secure Payment • Powered by Pakasir</p>
+      <p class="copyright">© 2026 Payment Pribadi</p>
+    </footer>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
