@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembayaran</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+
+    <!-- ==================== VIEW: INPUT ==================== -->
+    <section id="view-input" class="card">
+      <h1>Pembayaran</h1>
+      <p class="subtitle">Masukkan nominal yang ingin dibayar</p>
+
+      <div class="input-group">
+        <span class="currency">Rp</span>
+        <input
+          type="text"
+          id="amountInput"
+          inputmode="numeric"
+          placeholder="0"
+          autocomplete="off"
+        >
+      </div>
+
+      <button id="payButton" class="btn btn-primary">
+        Bayar Sekarang
+      </button>
+
+      <p id="errorMessage" class="error-message"></p>
+    </section>
+
+    <!-- ==================== VIEW: LOADING ==================== -->
+    <section id="view-loading" class="card hidden">
+      <div class="spinner"></div>
+      <p>Membuat transaksi...</p>
+    </section>
+
+    <!-- ==================== VIEW: PAYMENT ==================== -->
+    <section id="view-payment" class="card hidden">
+      <h2>Detail Pembayaran</h2>
+
+      <div class="payment-info">
+        <div class="info-row">
+          <span class="info-label">Total Bayar</span>
+          <span class="info-value" id="displayTotal">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Order ID</span>
+          <span class="info-value" id="displayOrderId">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Status</span>
+          <span class="info-value status-badge" id="displayStatus">-</span>
+        </div>
+      </div>
+
+      <div id="qrisContainer" class="qris-container">
+        <img id="qrisImage" alt="QRIS Code" />
+      </div>
+
+      <div id="expiryContainer" class="expiry-container hidden">
+        <span class="info-label">Batas Waktu</span>
+        <span id="countdown" class="countdown">--:--</span>
+      </div>
+
+      <div class="button-group">
+        <button id="checkStatusButton" class="btn btn-secondary">
+          Cek Status Pembayaran
+        </button>
+        <button id="saveQrisButton" class="btn btn-outline">
+          Simpan QRIS
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW: SUCCESS ==================== -->
+    <section id="view-success" class="card hidden success-view">
+      <div class="success-icon">✓</div>
+      <h2>Pembayaran Berhasil</h2>
+      <p class="subtitle">Terima kasih, pembayaran Anda telah diterima</p>
+      <div class="info-row">
+        <span class="info-label">Order ID</span>
+        <span class="info-value" id="successOrderId">-</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
